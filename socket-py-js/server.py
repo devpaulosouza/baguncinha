@@ -8,17 +8,18 @@ s.listen(1)
 
 print('aguardando conexão...')
 
-conn1, addr1 = s.accept()
-print ('consagrado no ip ' + addr1[0] + ' se conectou.' ), addr1
+while True:
+    conn, addr = s.accept()
+    print ('consagrado no ip ' + addr[0] + ' se conectou.' )
 
-close = False
+    close = False
 
-while not close:
-    try:
-        data = conn1.recv(1024)
-    except socket.error:
-        print ('Deu ruim...')
-    if data:
-        print (data.decode('utf-8'))
-        conn1.send('data'.encode())
-        close = True
+    while not close:
+        try:
+            data = conn.recv(1024)
+        except socket.error:
+            print ('Deu ruim...')
+        if data:
+            print (data.decode('utf-8'))
+            conn.send('data'.encode())
+            close = True
